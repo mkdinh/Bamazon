@@ -1,0 +1,29 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.5.0",
+    "console.table": "^0.8.0",
+    "inquirer": "^3.2.1",
+    "mysql": "^2.14.1",
+    "watchify": "^3.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "browserify-js": "browserify assets/js/bamazonCustomer.js > assets/js/bundles.js",
+    "watchify-js": "watchify assets/js/bamazonCustomer.js -o assets/js/bundles.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkdinh/Bamazon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkdinh/Bamazon/issues"
+  },
+  "homepage": "https://github.com/mkdinh/Bamazon#readme"
+}
