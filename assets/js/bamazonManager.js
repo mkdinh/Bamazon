@@ -98,7 +98,7 @@ function viewProduct(){
 		if(err) throw err;
 
 		// console log database into tble
-		console.table(data)
+		console.table('\n',data)
 
 		// restart process
 		start();
@@ -121,7 +121,7 @@ function viewLowInventory(){
 			console.log('\tNo product with quantity less than 5')
 		else{
 			// console.log data into table
-			console.table(data)
+			console.table('\n',data)
 
 			// restart process
 			start();

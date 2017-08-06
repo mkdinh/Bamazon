@@ -25,7 +25,7 @@ connection.connect(function(err){
 	if (err) throw err;
 
 	// indicate thread id
-	console.log('connect to database with id ',connection.threadId);
+	console.log('connect to database with id ',connection.threadId,'\n');
 
 	// start module
 	start();
@@ -57,7 +57,7 @@ function start(){
 
 function displayItem(){
 	// create query string
-	var queryStr = 'SELECT * FROM products'
+	var queryStr = 'SELECT item_id, product_name,department_name,price,stock_quantity FROM products'
 	// generate query
 	connection.query(queryStr, function(err,data){
 		
@@ -65,8 +65,7 @@ function displayItem(){
 		if(err) throw err;
 
 		// console log items
-		console.table(data)
-		console.log('\n')
+		console.table(data,'\n')
 
 		// inquirer for item 
 		shop()
@@ -79,7 +78,7 @@ function shop(){
 		// inquirer for id
 		{
 			name: 'id',
-			message: "Select the id of the item you would like to purchase",
+			message: "Select the id of the item you would like to purchase >>",
 			type: 'input',
 			validate: validateNum
 		},
@@ -114,24 +113,25 @@ function checkStock(res){
 		var price = parseFloat(data[0].price);
 		var availQuant = parseInt(data[0].stock_quantity)
 		var buyQuant = parseInt(res.stock);
-
+		var subtotal =  buyQuant * price;
 		// check if stock is available
-		if((availQuant - buyQuant) > 0){
+		if((availQuant - buyQuant) >= 0){
 		// if available 
 
 			// update available quantity
 			
-			// update stock on database with amount and id
-			updateStock(res.id, buyQuant);
+			// update stock and product_sale on database with amount and id
+			updateStock(res.id, buyQuant, subtotal);
 
 			// update cart
 			cart.push(product + " x " + buyQuant);
 
+
 			// update price
-			total += buyQuant * price;
+			total += subtotal
 
 			// fixed total price to 2 decimal place
-			total = total.toFixed(2);
+			total = parseFloat(total).toFixed(2);
 
 			// console log current cart and total
 			console.log('Current Cart: \n\n'
@@ -155,11 +155,12 @@ function checkStock(res){
 	})
 }
 
-function updateStock(id,num){
-	var queryStr = 'UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?';
+function updateStock(id,num,sub){
+	var queryStr = 'UPDATE products SET stock_quantity = stock_quantity - ?, product_sale 	 = product_sale + ? '
+				 + 'WHERE item_id = ?';
 
 	// Update stock quantity by id number
-	connection.query(queryStr, [num, id], function(err,data){
+	connection.query(queryStr, [num,sub,id], function(err,data){
 
 		// handle error
 		if(err) throw err;

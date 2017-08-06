@@ -94,7 +94,7 @@ function displayDep(){
 		if(err) throw err;
 
 		// console log database into table
-		console.table('\n',data)
+		console.table('\n\n',data)
 
 		// restart process
 		start();
@@ -127,12 +127,19 @@ function start(){
 
 function viewByDep(){
 	// create query string or viewing department list
-	var queryStr = 'SELECT DISTINCT department_name FROM departments';
+	var queryStr = 'SELECT departments.department_id, departments.department_name, departments.overhead_cost, ROUND(SUM(products.product_sale),2) as "total_sale",' 
+				 + 'ROUND(SUM(products.product_sale) - departments.overhead_cost,2) AS total_profit '
+				 + 'FROM departments '
+				 + 'INNER JOIN products ON departments.department_name = products.department_name '
+				 + 'GROUP BY departments.department_name ';
 
 	// run query on database to get unique department name
 	connection.query(queryStr, function(err,data){
 		// handle error
 		if(err) throw err;
+
+		// console.table departments table inner join w/ product table
+		console.table('\n',data)
 
 		// grabbing department list
 		var depList = [];
