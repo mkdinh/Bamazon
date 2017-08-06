@@ -8,7 +8,7 @@ var inquirer = require('inquirer');
 
 // declare application variables
 
-var cart = [];
+var cart = [];	
 var total = 0;
 
 // Connect to database

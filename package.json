@@ -13,8 +13,6 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "browserify-js": "browserify assets/js/bamazonCustomer.js > assets/js/bundles.js",
-    "watchify-js": "watchify assets/js/bamazonCustomer.js -o assets/js/bundles.js "
   },
   "repository": {
     "type": "git",
