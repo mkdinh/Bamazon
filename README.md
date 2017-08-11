@@ -17,7 +17,8 @@ BAMAZON USING NODE.JS AND MYSQL
 
 1. download repository on Github: https://github.com/mkdinh/Bamazon
 2. Run data/schema.sql in mySQL to create database
-3. Open data/tables.sql in mySQL and change LOAD DATA LOCAL INFILE 'C:/../Bamazon/data/tables.sql' to the full path of the data/	tables.sql on your system
+3. Oen data/tables.sql in mySQL and change LOAD DATA LOCAL INFILE 'C:/../Bamazon/data/tables.sql' to the full path of the data/	tables.sql on your system
+>>>>>>> 5f11e2ea4f50d0a60610ed7f458c7f79f67ef232
 
 -------- Testing DB connection ----------
 
